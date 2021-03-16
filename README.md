@@ -62,7 +62,7 @@ Mitigation strategies include
 * Using value types (`structs` or `records` in C# 9) to make objects on the stack
 * Reusing objects, for example in a cache, when instances rotate
 * Nulling local variables before a long running async process to allow them to be collected
-* Avoid Finalizers. Objects with finalizers are promoted at least one additional generation.
+* Know when to use Finalizers. Objects with finalizers are promoted at least one additional generation.
 
 ## Exercise
 
