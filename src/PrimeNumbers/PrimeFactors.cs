@@ -147,13 +147,6 @@ namespace PrimeNumbers
         /// </summary>
         /// <returns>
         /// A 32-bit signed integer that indicates the relative order of the objects being compared.
-        /// The return value has the following meanings:
-        ///
-        /// Value               Meaning
-        ///
-        /// Less than zero      This object is less than the <paramref name="other"/> parameter.
-        /// Zero                This object is equal to <paramref name="other"/>.
-        /// Greater than zero   This object is greater than <paramref name="other"/>.
         /// </returns>
         /// <remarks>
         /// The greatest PrimeFactor is the one with the highest prime factor.  In the event of
@@ -165,7 +158,7 @@ namespace PrimeNumbers
         public int CompareTo(PrimeFactors other)
         {
             if (_powers.Length != other._powers.Length)
-                return (_powers.Length - other._powers.Length);
+                return _powers.Length - other._powers.Length;
 
             for (var i = _powers.Length - 1; i >= 0; i--)
             {
@@ -219,8 +212,8 @@ namespace PrimeNumbers
             foreach (var p in _powers)
             {
                 var num3 = (num >> 0x1c) & 0xff;
-                num = num << 4;
-                num = (num ^ p) ^ num3;
+                num <<= 4;
+                num = num ^ p ^ num3;
             }
             return num;
         }

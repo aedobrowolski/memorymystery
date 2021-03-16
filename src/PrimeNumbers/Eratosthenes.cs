@@ -494,7 +494,7 @@ namespace PrimeNumbers
         /// <summary>
         /// The largest prime stored in the static array Primes.
         /// </summary>
-        static double MaxPrime => _primes[^1];
+        public static int MaxPrime => _primes[^1];
 
         /// <summary>
         /// Return an array of primes.  The array is statically allocated with all primes less
@@ -533,14 +533,12 @@ namespace PrimeNumbers
 
                 lastPrimeSquare = lastPrime * lastPrime; // optimization
                 for (var i = lastPrimeSquare; i < max; i += lastPrime)
-                    if (i > 0)
-                        isPrime[i] = false;
+                    if (i > 0) isPrime[i] = false;
             }
 
             var primes = new List<int>();
             for (var i = 2; i < max; i++)
-                if (isPrime[i])
-                    primes.Add(i);
+                if (isPrime[i]) primes.Add(i);
 
             return primes.ToArray();
         }

@@ -21,7 +21,7 @@ namespace PrimeNumbers
         public void IncludesRequest()
         {
             // Make sure the array includes the prime requested
-            var p = 5;
+            const int p = 5;
             var upToP = Eratosthenes.Sieve(p);
             Assert.That(upToP[^1], Is.GreaterThanOrEqualTo(p));
         }

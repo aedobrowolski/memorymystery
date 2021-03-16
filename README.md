@@ -35,7 +35,8 @@ Finalizer roots live until the finalizer is run. For performance reasons this
 happens after the GC that discovers the object since the finalizer can run
 arbitrary code. The object is truly collected in the next GC.
 
-A managed object that cannot be traced back to at least one GC root is eligible for being collected.  There are a number of common causes for memory leaks
+A managed object that cannot be traced back to at least one GC root is eligible
+for being collected. There are a number of common causes for memory leaks
 
 * Static references to an object that should be temporary
 * Local objects captured in a lambda function that lives beyond the life of the enclosing method
@@ -49,7 +50,9 @@ Mitigation strategies include
 
 ## GC Pressure
 
-We are not out of the woods once we have eliminated any memory leaks in our program. It is still possible that the program is allocating and collecting too many objects in the course of a computation.  This is known as memory traffic.
+We are not out of the woods once we have eliminated any memory leaks in our
+program. It is still possible that the program is allocating and collecting too
+many objects in the course of a computation. This is known as memory traffic.
 
 The causes of excessive memory traffic in .NET are
 

@@ -33,7 +33,7 @@ namespace MemoryMystery
         {
             Console.Write($"Type a command or enter 'x' to exit (use numbers up to {int.MaxValue})" + Prompt);
             string line;
-            while ((line = Console.ReadLine()) != "x") 
+            while ((line = Console.ReadLine()) != "x")
                 Console.Write(Invoke(line) + Prompt);
         }
 
@@ -84,7 +84,7 @@ namespace MemoryMystery
         {
             switch (obj)
             {
-                case IEnumerable<HistoryItem> history: 
+                case IEnumerable<HistoryItem> history:
                     return string.Join("\n", history);
                 case IEnumerable<int> strings:
                     return string.Join(" ", strings);

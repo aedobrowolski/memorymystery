@@ -4,7 +4,6 @@ namespace PrimeNumbers
 {
     public static class Prime
     {
-
         /// <summary>
         /// Return an array of primes.  The array is statically allocated with all primes less
         /// than MaxPrime.  More can be added dynamically if needed.
@@ -24,7 +23,6 @@ namespace PrimeNumbers
             return (int[])Eratosthenes.GetPrimes(maxPrime).Clone();
         }
 
-
         /// <summary>
         /// Test if a number is prime.  For now this function is limited by the length of
         /// the array of known primes (inputs up to maxPrime squared).
@@ -43,7 +41,7 @@ namespace PrimeNumbers
 
             // Check the array of known primes for small values
             if (value <= maxPrime)
-                return (0 <= Array.BinarySearch(primes, value));
+                return 0 <= Array.BinarySearch(primes, value);
 
             // Look for a factor up to the sqrt of the values.
             var sqrt = (int)Math.Sqrt(value);

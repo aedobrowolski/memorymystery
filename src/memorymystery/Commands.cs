@@ -54,7 +54,7 @@ namespace MemoryMystery
         /// </summary>
         /// <param name="args">Command line tokens</param>
         /// <returns>Number of divisors.</returns>
-        private static object CountDivisors(string[] args) => Divisor.CountDivisors((int.Parse(args[1])));
+        private static object CountDivisors(string[] args) => Divisor.CountDivisors(int.Parse(args[1]));
 
         /// <summary>
         /// Multiply two numbers
