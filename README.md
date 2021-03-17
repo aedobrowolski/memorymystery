@@ -67,23 +67,61 @@ Mitigation strategies include
 * Nulling local variables before a long running async process to allow them to be collected
 * Know when to use Finalizers. Objects with finalizers are promoted at least one additional generation.
 
+## Memory Management Mystery
+
+`MemoryMystery` is a command line tool (CLI) that performs some math operations.
+I have deliberately introduced some memory leaks and bad memory traffic into the
+application. Your job will be to run it under your favorite memory diagnostic
+tool and to find the root causes of all memory problems. Optionally you can try
+to fix the issues and make the application run with optimal performance.
+
+The CLI runs a REPL (read-execute-print-loop) with these commands:
+
+Command | Description
+--------| --------------
+`isPrime` _n_ | check if _n_  is prime and return a boolean
+`factor` _n_ | return an ordered list of prime factors of _n_ and their powers
+`divisors` _n_ | return a list of divisors of _n_ including itself
+`countDivisors` _n_ | return the number of inclusive divisors of _n_
+`multiply` _n m_ | multiply _n_ by _m_
+`history` | return a list of the last 100 commands and results
+`times` _n_  _cmd_ | execute command _cmd_ _n_ times
+`repeat` _cmd_ | execute command _cmd_ twenty times
+
+The last two commands are for load testing. They will not appear in the history
+but the commands that they execute will. In most terminals you will be able to
+use the arrow keys to repeat and modify a command that has already been entered.
+
+The application works with signed `int32` values. Out of range errors will be
+reported. All primes up to the Mersenne prime $2^{31}-1$ are correctly reported
+as prime. However factoring requires a list of primes limiting the largest prime
+that can be factored to 2147483587. Building the list using Erastothenes'
+algorithm will take a very long time.
+
+Try the following commands, listed in approximate order of increasing memory
+pressure.
+
+```text
+countDivisors 28 => 6
+divisors 28 => 1 2 4 7 14 28
+isPrime 8192 => False
+isPrime 8191 => True
+factor 8192 => 1 * 2^13
+isPrime 2147483647 => True
+factor 2146654199 => 1 * 46327 * 46337
+times 500 factor 2146654199 => 1 * 46327 * 46337
+factor 987654321 => 1 * 3^2 * 17^2 * 379721
+factor 897654321 => 1 * 3^2 * 31 * 3217399
+```
+
 ## Exercise
 
-In the exercise below you will be asked to run a console application that
-performs certain arithmetic operations related to prime numbers. The application
-has a fixed heap size 20Mb to establish a level playing field. These require
-lots of memory. Your job will be to achieve these simultaneous goals:
+Build and run the `memorymystery.exe` console application with some of the sample
+commands listed above. These require lots of memory. The challenge is to achieve
+these goals:
 
 * Lower the peak memory usage
 * Remove all memory leaks
 * Run fewer GC cycles
 
 Use a memory profiler to find the leaks and causes of GC pressure.
-
-## Memory Management Mystery
-
-The application is a command line tool to perform some math operations. I have
-deliberately introduced some memory leaks and bad memory traffic. Your job will
-be to run the application under your favorite memory diagnostic tool to find
-the root causes of all memory problems. Optionally you can try to fix the
-issues and make the application run with optimal performance.
